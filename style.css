@@ -1,0 +1,420 @@
+/* ==========================================================================
+   Coffee Bean E-Commerce Stylesheet
+   ========================================================================== */
+
+:root {
+    /* 
+       Color Palette - CSS Variables 
+       Using variables ensures consistency across the site and makes global color 
+       changes (like rebranding) much easier.
+    */
+    --primary-color: #4b3621;   /* Deep Coffee Brown: For main branding and heavy text */
+    --secondary-color: #6f4e37; /* Medium Roast Brown: For accents and interaction elements */
+    --accent-color: #d2b48c;    /* Tan/Latte: For soft backgrounds and highlights */
+    --bg-color: #f8f5f2;        /* Off-white: The global site background */
+    --text-color: #333333;      /* Dark Gray: Primary readability color */
+    --light-text: #666666;      /* Medium Gray: For secondary information */
+    --white: #ffffff;           /* Pure White: For cards and high-contrast areas */
+    
+    /* Semantic Status Colors */
+    --success-green: #2e7d32;   /* For "In Stock" indicators */
+    --warning-orange: #ed6c02;  /* For "Low Stock" indicators */
+    
+    /* Specific Coffee Roast Colors */
+    --light-roast-color: #e6c17a;
+    --medium-roast-color: #a0522d;
+    --dark-roast-color: #3e2723;
+}
+
+/* 
+   Global Reset 
+   Ensures a consistent starting point across all browsers by removing 
+   default margins and padding.
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Includes padding and border in element width/height */
+}
+
+/* 
+   Base Styles & Typography 
+*/
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Headlines use a more elegant, traditional serif font */
+h1, h2, h3, h4, h5 {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-color);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s; /* Smooth hover transition */
+}
+
+ul {
+    list-style: none;
+}
+
+/* Layout Utility: Limits content width and centers it */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 
+   Header & Navigation
+   Sticky positioning allows the header to remain at the top during scroll.
+*/
+.main-header {
+    background-color: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+}
+
+.logo .accent {
+    color: var(--secondary-color);
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.main-nav a {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.main-nav a:hover, .main-nav a.active {
+    color: var(--secondary-color);
+}
+
+/* Navigation Login Button */
+.btn-login {
+    border: 1px solid var(--primary-color);
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: var(--primary-color);
+}
+
+.btn-login:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* 
+   Hero Section 
+   Uses a linear-gradient overlay on the background image to ensure text is readable.
+*/
+.hero {
+    background: linear-gradient(rgba(43, 29, 14, 0.7), rgba(43, 29, 14, 0.7)), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero-content h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: var(--white);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    opacity: 0.9;
+}
+
+/* Primary Button Styling */
+.btn-primary {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background-color: #c4a47c;
+}
+
+/* 
+   Product Grid Section 
+   Uses CSS Grid for a clean, responsive layout that automatically adjusts column counts.
+*/
+.section {
+    padding: 60px 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header h3 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.product-grid {
+    display: grid;
+    /* Grid-columns: dynamic sizing based on available width */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* 
+   Product Card Component 
+*/
+.product-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+    border: 1px solid #eee;
+}
+
+.product-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+.card-image {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.product-card:hover .card-image img {
+    transform: scale(1.05); /* Slight zoom on image hover */
+}
+
+/* Status/Type Badges */
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+}
+
+.badge-light { background-color: var(--light-roast-color); color: #333; }
+.badge-medium { background-color: var(--medium-roast-color); }
+.badge-dark { background-color: var(--dark-roast-color); }
+
+.card-body {
+    padding: 20px;
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--light-text);
+    margin-bottom: 10px;
+}
+
+.flavor-tag {
+    color: var(--secondary-color);
+    font-weight: 500;
+}
+
+.product-title {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+}
+
+.product-desc {
+    font-size: 0.9rem;
+    color: var(--light-text);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* 
+   Lot Information Component 
+   Crucial for a specialized coffee shop to show roast freshnes.
+*/
+.lot-info {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    border-left: 3px solid var(--accent-color);
+}
+
+.lot-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.lot-detail .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #888;
+}
+
+.lot-detail .value {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Card Action Area */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.price-stock {
+    display: flex;
+    flex-direction: column;
+}
+
+.price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.stock-status {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.stock-status.in-stock { color: var(--success-green); }
+.stock-status.low-stock { color: var(--warning-orange); }
+
+/* Outlined Action Button */
+.btn-outline {
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+    background: transparent;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-outline:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* 
+   Footer Section 
+*/
+.main-footer {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 40px 0;
+    margin-top: 60px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-left h5 {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.footer-left p {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    color: var(--accent-color);
+}
+
+/* 
+   Responsive Media Queries 
+   Ensures the site is usable on tablets and mobile phones.
+*/
+@media (max-width: 768px) {
+    /* Stack header elements vertically */
+    .header-content {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 0;
+    }
+    
+    .main-nav ul {
+        margin-top: 15px;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    /* Responsive font resizing */
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+    
+    /* Stack footer content */
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
