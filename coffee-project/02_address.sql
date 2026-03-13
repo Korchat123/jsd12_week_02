@@ -1,0 +1,9 @@
+--INSERT INTO address(address_id,home_address,province,district,postal_code,username) VALUES
+--(1,'5 moo 3','nakonpathom','thambluang',73000,'AWAKE1223');
+--INSERT INTO address(address_id,home_address,province,district,postal_code,username) VALUES
+--(2,'163/8 moo 17','bangkok','salathamasop',10170,'BY01208'),
+--(3,'17','bangkok','Pinklao',10160,'BY01208');
+--INSERT INTO address(address_id,home_address,province,district,postal_code,username) VALUES
+--(4,'18 moo 2','bangkok','KANAYOW',10600,'CPP01'),
+--(5,'12','bangkok','KLONSAM',10510,'CPP01');
+--UPDATE address SET district='bangpad', postal_code=10700 where address_id=3;git sta
